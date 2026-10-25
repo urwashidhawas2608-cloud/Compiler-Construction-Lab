@@ -1,0 +1,31 @@
+%{
+/* Name: Urwashi Dhawas | PRN: 24070521154 */
+#include <stdio.h>
+%}
+
+%%
+"1"  { printf("one "); }
+"2"  { printf("two "); }
+"3"  { printf("three "); }
+"4"  { printf("four "); }
+"5"  { printf("five "); }
+"6"  { printf("six "); }
+"7"  { printf("seven "); }
+"8"  { printf("eight "); }
+"9"  { printf("nine "); }
+"10" { printf("ten "); }
+[ \t\r\n]+  { }
+.           { ECHO; }
+%%
+
+int main()
+{
+    yylex();
+    printf("\n");
+    return 0;
+}
+
+int yywrap()
+{
+    return 1;
+}
