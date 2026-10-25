@@ -1,0 +1,35 @@
+%{
+/* Name: Urwashi Dhawas | PRN: 24070521154 */
+#include <stdio.h>
+
+int count = 0;
+%}
+
+%%
+[Aa][a-zA-Z]* {
+    count++;
+}
+
+[^ \t\r\n]+ {
+    /* Ignore other words */
+}
+
+[ \t\r\n]+ {
+    /* Ignore whitespace */
+}
+%%
+
+int main()
+{
+    yylex();
+
+    printf("Number of words starting with 'A' or 'a': %d\n",
+           count);
+
+    return 0;
+}
+
+int yywrap()
+{
+    return 1;
+}
