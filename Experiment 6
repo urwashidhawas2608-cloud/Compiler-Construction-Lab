@@ -1,0 +1,46 @@
+// Name: Urwashi Dhawas
+ // PRN: 24070521154
+ #include <stdio.h>
+
+ void decimal_to_hex(int num)
+ {
+     char hex[100];
+     int i = 0;
+     int remainder;
+
+     if (num == 0) {
+         printf("0x0\n");
+         return;
+     }
+
+     if (num < 0) {
+         printf("Negative numbers are not supported.\n");
+         return;
+     }
+
+     while (num != 0) {
+         remainder = num % 16;
+
+         if (remainder < 10)
+             hex[i++] = remainder + '0';
+         else
+             hex[i++] = remainder - 10 + 'A';
+
+         num = num / 16;
+     }
+
+     printf("0x");
+     for (i = i - 1; i >= 0; i--)
+         printf("%c", hex[i]);
+
+     printf("\n");
+ }
+
+ int main(void)
+ {
+     int num;
+     printf("Enter a decimal number: ");
+     scanf("%d", &num);
+     decimal_to_hex(num);
+     return 0;
+ }
