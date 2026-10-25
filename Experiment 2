@@ -1,0 +1,62 @@
+%{
+/* Name: Urwashi Dhawas | PRN: 24070521154 */
+#include <stdio.h>
+
+int comments = 0, keywords = 0, identifiers = 0;
+int words = 0, lines = 0, spaces = 0;
+%}
+
+%%
+"//".* {
+    comments++;
+}
+
+"/*"([^*]|\*+[^*/])*\*+"/" {
+    comments++;
+}
+
+"int"|"char"|"float"|"double"|"if"|"else"|"while"|"for"|"return"|"void"|"main" {
+    keywords++;
+    words++;
+}
+
+[a-zA-Z_][a-zA-Z0-9_]* {
+    identifiers++;
+    words++;
+}
+
+[ \t]+ {
+    spaces += yyleng;
+}
+
+\n {
+    lines++;
+}
+
+[0-9]+ {
+    words++;
+}
+
+. {
+    /* Ignore punctuation */
+}
+%%
+
+int main()
+{
+    yylex();
+
+    printf("Comments: %d\n", comments);
+    printf("Keywords: %d\n", keywords);
+    printf("Identifiers: %d\n", identifiers);
+    printf("Words: %d\n", words);
+    printf("Lines: %d\n", lines);
+    printf("Spaces: %d\n", spaces);
+
+    return 0;
+}
+
+int yywrap()
+{
+    return 1;
+}
