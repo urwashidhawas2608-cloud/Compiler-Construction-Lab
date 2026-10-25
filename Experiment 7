@@ -1,0 +1,27 @@
+%{
+#include <stdio.h>
+int line_number = 0;
+%}
+
+%%
+.*com[ \t]*\n {
+    line_number++;
+    printf("Line %d ends with com: %s",
+           line_number, yytext);
+}
+.*\n {
+    line_number++;
+}
+. ;
+%%
+
+int yywrap(void)
+{
+    return 1;
+}
+
+int main(void)
+{
+    yylex();
+    return 0;
+}
